@@ -1,6 +1,7 @@
 # Hyperust
 Type 2 Hypervisor written entirely in rust
-how to debug:
+
+## Debugging
 1. setup kernel debugging
 2. run the following
 ```windbg
@@ -10,7 +11,7 @@ bp driver.sys!DriverEntry
 ```
 
 ----
-Refrences:
+## Refrences:
 1. https://not-matthias.github.io/kernel-driver-with-rust/
 2. https://github.com/Trantect/winapi-rs.git
 3. https://rayanfam.com/topics/hypervisor-from-scratch-part-1/
