@@ -1,19 +1,20 @@
 #![no_std]
+#![feature(alloc_prelude)]
 
-use crate::include::MmIsAddressValid;
-use crate::process::Process;
-use crate::string::create_unicode_string;
+#[macro_use]
+extern crate alloc;
 use core::panic::PanicInfo;
+use win_kmd_alloc::KernelAlloc;
 
-pub mod include;
-pub mod log;
-pub mod process;
-pub mod string;
+mod logger;
 
 /// Explanation can be found here: https://github.com/Trantect/win_driver_example/issues/4
 #[used]
 #[no_mangle]
 static _fltused: i32 = 0;
+
+#[global_allocator]
+static GLOBAL: KernelAlloc = KernelAlloc;
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
@@ -21,21 +22,7 @@ fn panic(_info: &PanicInfo) -> ! {
 }
 
 #[no_mangle]
-pub extern "system" fn driver_entry() -> u32 {
-    // MmIsAddressValid
-    //
-    let is_valid = unsafe { MmIsAddressValid(0 as _) };
-    log!("MmIsAddressValid(0) returned %i", is_valid as u64);
-
-    // String
-    //
-    let string = create_unicode_string(obfstr::wide!("Hello World!\0"));
-    log!("String: %ws", string.Buffer);
-
-    // Process
-    //
-    let process = Process::by_id(4 as _);
-    log!("Process found: %i", process.is_some() as u64);
-
+pub extern "system" fn DriverEntry() -> u32 {
+    log!("Hello world3{}", 12); 
     0 /* STATUS_SUCCESS */
 }
