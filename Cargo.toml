@@ -10,16 +10,20 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies.winapi]
-git = "https://github.com/Trantect/winapi-rs.git"
+git = "https://github.com/yious/winapi-rs.git"
 branch = "feature/km"
 features = [
     "wdm",
-    "ntstatus"
+    "ntstatus",
+    "ntdef"
 ]
 
 [dependencies.win-kmd-alloc]
 git = "https://github.com/woodgear/win-kmd-alloc.git"
 branch = "feature/km"
+
+[dependencies]
+obfstr = "0.1.1"
 
 [build-dependencies]
 winreg = "0.7.0"
